@@ -12,16 +12,16 @@ public class CargoModel {
     @GeneratedValue
             (strategy = GenerationType.IDENTITY)
 
-    private Long id_cargo;
+    private Long id;
     private String nome_cargo;
     private String descricao_cargo;
 
-    public Long getId_cargo() {
-        return id_cargo;
+    public Long getId() {
+        return id;
     }
 
-    public void setId_cargo(Long id_cargo) {
-        this.id_cargo = id_cargo;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome_cargo() {

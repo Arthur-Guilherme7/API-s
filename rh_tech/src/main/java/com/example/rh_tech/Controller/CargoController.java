@@ -1,13 +1,13 @@
 package com.example.rh_tech.Controller;
 
 import com.example.rh_tech.Model.CargoModel;
-import com.example.rh_tech.Model.UsuarioModel;
 import com.example.rh_tech.Service.CargoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+@CrossOrigin
 @RestController
 @RequestMapping("/api/cargos")
 public class CargoController {
@@ -15,7 +15,7 @@ public class CargoController {
     CargoService service;
 
     @PostMapping
-    public CargoModel SalvarUsuario(CargoModel cargoModel){
+    public CargoModel SalvarUsuario( @RequestBody CargoModel cargoModel){
         return service.AdicionarUsuario(cargoModel);
     }
     @GetMapping
