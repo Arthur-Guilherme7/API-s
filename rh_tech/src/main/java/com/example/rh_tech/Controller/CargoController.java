@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/cargos")
 public class CargoController {
@@ -16,16 +16,16 @@ public class CargoController {
 
     @PostMapping
     public CargoModel SalvarUsuario( @RequestBody CargoModel cargoModel){
-        return service.AdicionarUsuario(cargoModel);
+        return service.AdicionarCargo(cargoModel);
     }
     @GetMapping
     public List<CargoModel> ListarTodos(){
-        return service.ListarTodosUsuarios();
+        return service.ListarTodos();
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> DeletarUsuario(@PathVariable Long id){
         try{
-            service.DeletarUsuario(id);
+            service.DeletarCargo(id);
             return ResponseEntity.noContent().build();
         }catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
@@ -34,7 +34,7 @@ public class CargoController {
     @PutMapping("/{id}")
     public ResponseEntity<CargoModel> Atulizar (@PathVariable Long id, @RequestBody CargoModel cargoModel){
         try{
-            CargoModel cargoAtt = service.AtualizarUsuario(id, cargoModel);
+            CargoModel cargoAtt = service.AtualizarCargo(id, cargoModel);
             return ResponseEntity.ok(cargoAtt);
         }catch (RuntimeException e){
             return ResponseEntity.notFound().build();

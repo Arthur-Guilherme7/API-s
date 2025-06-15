@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface FuncionariosPorCargoRepository extends JpaRepository<FuncionariosPorCargoModel,Long> {
 
-    List<FuncionariosPorCargoModel> findByCargo_id_Id(Long id);
-    List<FuncionariosPorCargoModel> findByFuncionario_id_Id(Long funcionarioId);
+    List<FuncionariosPorCargoModel> findByCargo_Id(Long cargoId);
+    List<FuncionariosPorCargoModel> findByFuncionario_Id(Long funcionarioId);
+    List<FuncionariosPorCargoModel> findByFuncionario_IdAndCargo_Id(Long funcionarioId, Long cargoId);
+
 }

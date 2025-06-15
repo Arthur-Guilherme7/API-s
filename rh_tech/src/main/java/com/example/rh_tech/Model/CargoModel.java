@@ -13,8 +13,8 @@ public class CargoModel {
             (strategy = GenerationType.IDENTITY)
 
     private Long id;
-    private String nome_cargo;
-    private String descricao_cargo;
+    private String nome;
+    private String descricao;
 
     public Long getId() {
         return id;
@@ -24,19 +24,19 @@ public class CargoModel {
         this.id = id;
     }
 
-    public String getNome_cargo() {
-        return nome_cargo;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNome_cargo(String nome_cargo) {
-        this.nome_cargo = nome_cargo;
+    public void setNome(String nome_cargo) {
+        this.nome = nome_cargo;
     }
 
-    public String getDescricao_cargo() {
-        return descricao_cargo;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setDescricao_cargo(String descricao_cargo) {
-        this.descricao_cargo = descricao_cargo;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 }

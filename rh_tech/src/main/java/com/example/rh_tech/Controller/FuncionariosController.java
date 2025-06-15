@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/usuarios")
 public class FuncionariosController {
@@ -16,7 +16,7 @@ public class FuncionariosController {
     FuncionariosService service;
 
     @PostMapping
-    public FuncionariosModel salvarUsuario(FuncionariosModel funcionariosModel){
+    public FuncionariosModel salvarUsuario( @RequestBody FuncionariosModel funcionariosModel){
         return service.adicionarUsuario(funcionariosModel);
     }
     @GetMapping
@@ -33,9 +33,9 @@ public class FuncionariosController {
         }
     }
     @PutMapping("/{id}")
-    public ResponseEntity<FuncionariosModel> atulizar (@PathVariable Long id, @RequestBody FuncionariosModel funcionariosModel){
+    public ResponseEntity<FuncionariosModel> atualizar (@PathVariable Long id, @RequestBody FuncionariosModel funcionariosModel){
         try{
-            FuncionariosModel usuarioAtt = service.atualizarUsuario(id,funcionariosModel);
+            FuncionariosModel usuarioAtt = service.atualizarUsuario(id, funcionariosModel);
             return ResponseEntity.ok(usuarioAtt);
         }catch (RuntimeException e){
             return ResponseEntity.notFound().build();

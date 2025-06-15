@@ -2,27 +2,46 @@ package com.example.rh_tech.Controller;
 
 import com.example.rh_tech.Model.FuncionariosPorCargoModel;
 import com.example.rh_tech.Service.FuncionariosPorCargoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/funcionarioscargo")
 public class FuncionariosPorCargoController {
 
-    FuncionariosPorCargoService service;
+    @Autowired
+    private FuncionariosPorCargoService service;
 
     @PostMapping
-    public FuncionariosPorCargoModel CriarVinculo( @RequestBody FuncionariosPorCargoModel funcionariosPorCargoModel){
+    public FuncionariosPorCargoModel criarVinculo(@RequestBody FuncionariosPorCargoModel funcionariosPorCargoModel){
         return service.criarVinculo(funcionariosPorCargoModel);
     }
 
     @GetMapping
-    public List<FuncionariosPorCargoModel>listarTodos(){
-        return service.ListarTodos();
+    public ResponseEntity<List<FuncionariosPorCargoModel>> filtrar(
+            @RequestParam(required = false) Long funcionarioId,
+            @RequestParam(required = false) Long cargoId) {
+
+        List<FuncionariosPorCargoModel> resultados;
+
+        if (funcionarioId != null && cargoId != null) {
+            resultados = service.FiltrarPorFuncionarioECargo(funcionarioId, cargoId);
+        } else if (funcionarioId != null) {
+            resultados = service.FiltrarPorFuncionario(funcionarioId);
+        } else if (cargoId != null) {
+            resultados = service.FiltrarPorCargo(cargoId);
+        } else {
+            resultados = service.ListarTodos();
+        }
+
+        if (resultados.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(resultados);
     }
 
     @GetMapping("/{id}")
@@ -34,44 +53,21 @@ public class FuncionariosPorCargoController {
 
     @PutMapping("/{id}")
     public ResponseEntity<FuncionariosPorCargoModel> atualizar (@PathVariable Long id, @RequestBody FuncionariosPorCargoModel funcionariosPorCargoModel) {
-        try{
+        try {
             FuncionariosPorCargoModel funcionariosCargo = service.Atualizar(id, funcionariosPorCargoModel);
             return ResponseEntity.ok(funcionariosCargo);
-        }catch (RuntimeException e){
+        } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
     }
-
-    @GetMapping(params = "cargoId")
-    public ResponseEntity<List<FuncionariosPorCargoModel>> filtrarPorCargo(@RequestParam Long cargoId) {
-        List<FuncionariosPorCargoModel> funcCarg = service.FiltrarPorCargo(cargoId);
-        if(funcCarg.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(funcCarg);
-    }
-
-    @GetMapping(params = "funcionarioId")
-    public ResponseEntity<List<FuncionariosPorCargoModel>> filtrarPorFuncionario(@RequestParam Long funcionarioId) {
-        List<FuncionariosPorCargoModel> funcId = service.FiltrarPorFuncionario(funcionarioId);
-        if(funcId.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(funcId);
-    }
-
-
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> DeletarUsuario(@PathVariable Long id) {
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
         try {
             service.Excluir(id);
             return ResponseEntity.noContent().build();
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
-
     }
-
-
 }

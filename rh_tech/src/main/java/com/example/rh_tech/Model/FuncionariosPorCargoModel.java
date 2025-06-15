@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Entity
 
-@Table(name = "Funcionarios")
+@Table(name = "funcionarios_por_cargo")
 public class FuncionariosPorCargoModel {
 
         @Id
@@ -16,12 +16,12 @@ public class FuncionariosPorCargoModel {
 
         @ManyToOne
         @JoinColumn(name = "funcionario_id", referencedColumnName = "id")
-        private FuncionariosModel funcionario_id;
+        private FuncionariosModel funcionario;
 
 
         @ManyToOne
         @JoinColumn(name = "cargo_id", referencedColumnName = "id")
-        private CargoModel cargo_id;
+        private CargoModel cargo;
 
         private String detalhes;
 
@@ -39,20 +39,20 @@ public class FuncionariosPorCargoModel {
         this.id = id;
     }
 
-    public FuncionariosModel getFuncionario_id() {
-        return funcionario_id;
+    public FuncionariosModel getFuncionario() {
+        return funcionario;
     }
 
-    public void setFuncionario_id(FuncionariosModel funcionario_id) {
-        this.funcionario_id = funcionario_id;
+    public void setFuncionario(FuncionariosModel funcionario) {
+        this.funcionario = funcionario;
     }
 
-    public CargoModel getCargo_id() {
-        return cargo_id;
+    public CargoModel getCargo() {
+        return cargo;
     }
 
-    public void setCargo_id(CargoModel cargo_id) {
-        this.cargo_id = cargo_id;
+    public void setCargo(CargoModel cargo) {
+        this.cargo = cargo;
     }
 
     public String getDetalhes() {

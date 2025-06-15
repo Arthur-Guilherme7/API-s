@@ -1,6 +1,5 @@
 package com.example.rh_tech.Service;
 
-import com.example.rh_tech.Model.FuncionariosModel;
 import com.example.rh_tech.Model.FuncionariosPorCargoModel;
 import com.example.rh_tech.Repository.FuncionariosPorCargoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +30,8 @@ public class FuncionariosPorCargoService {
         FuncionariosPorCargoModel funcionarioCargo = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Funcionario não encontrado"));
 
-        funcionarioCargo.setCargo_id(funcionariosPorCargoModel.getCargo_id());
-        funcionarioCargo.setFuncionario_id(funcionariosPorCargoModel.getFuncionario_id());
+        funcionarioCargo.setCargo(funcionariosPorCargoModel.getCargo());
+        funcionarioCargo.setFuncionario(funcionariosPorCargoModel.getFuncionario());
 
         return repository.save(funcionarioCargo);
     }
@@ -41,13 +40,18 @@ public class FuncionariosPorCargoService {
     }
 
     public List<FuncionariosPorCargoModel> FiltrarPorCargo(Long cargoId) {
-        return repository.findByCargo_id_Id(cargoId);
+        return repository.findByCargo_Id(cargoId);
     }
 
 
     public List<FuncionariosPorCargoModel> FiltrarPorFuncionario(Long funcionarioId){
-        return repository.findByFuncionario_id_Id(funcionarioId);
+        return repository.findByFuncionario_Id(funcionarioId);
     }
+
+    public List<FuncionariosPorCargoModel> FiltrarPorFuncionarioECargo(Long funcionarioId, Long cargoId) {
+        return repository.findByFuncionario_IdAndCargo_Id(funcionarioId, cargoId);
+    }
+
 
 
 }

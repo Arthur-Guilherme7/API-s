@@ -24,13 +24,13 @@ public class FuncionariosService {
         repository.deleteById(id);
     }
     public FuncionariosModel atualizarUsuario(Long id, FuncionariosModel funcionariosModel) {
-        FuncionariosModel funcionario = repository.findById(id)
+        FuncionariosModel usuario = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
-        funcionario.setNome(funcionariosModel.getNome());
-        funcionario.setEmail(funcionariosModel.getEmail());
+        usuario.setNome(funcionariosModel.getNome());
+        usuario.setEmail(funcionariosModel.getEmail());
 
-        return repository.save(funcionario);
+        return repository.save(usuario);
     }
     public Optional<FuncionariosModel> buscarPorId(Long id){
         return repository.findById(id);
