@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Relatório de Vínculos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body class="bg-gray-100 p-6">
+
+  <div class="max-w-5xl mx-auto bg-white shadow-md rounded p-6">
+    <h1 class="text-2xl font-bold mb-4 text-center">Relatório de Funcionários por Cargo</h1>
+
+    <!-- Filtros -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+      <div>
+        <label for="fFuncionario" class="block font-semibold mb-1">Funcionário</label>
+        <select id="fFuncionario" class="w-full border rounded px-3 py-2">
+          <option>Carregando...</option>
+        </select>
+      </div>
+      <div>
+        <label for="fCargo" class="block font-semibold mb-1">Cargo</label>
+        <select id="fCargo" class="w-full border rounded px-3 py-2">
+          <option>Carregando...</option>
+        </select>
+      </div>
+      <div class="flex items-end">
+        <button id="btnBuscar" class="bg-blue-600 text-white font-semibold px-4 py-2 rounded hover:bg-blue-700 w-full">
+          Buscar
+        </button>
+      </div>
+    </div>
+
+    <!-- Tabela -->
+    <div class="overflow-x-auto">
+      <table class="min-w-full bg-white border border-gray-300 text-sm">
+        <thead>
+          <tr class="bg-gray-200 text-left">
+            <th class="p-2 border">Funcionário</th>
+            <th class="p-2 border">Cargo</th>
+            <th class="p-2 border">Data Início</th>
+            <th class="p-2 border">Data Fim</th>
+            <th class="p-2 border">Detalhes</th>
+          </tr>
+        </thead>
+        <tbody id="tabelaVinculos">
+          <!-- Resultados serão inseridos aqui -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="assets/js/relatorio.js"></script>
+</body>
+</html>
